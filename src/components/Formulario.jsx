@@ -2,21 +2,19 @@ import { Form, Button, Container, FloatingLabel } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import ContenedorPeliculas from "./ContenedorPeliculas";
 const Formulario = () => {
-  const [nombreMascota, setNombreMascota] = useState("");
-  const [nombreDueño, setNombreDueño] = useState("");
-  const [fecha, setFecha] = useState("");
-  const [hora, setHora] = useState("");
-  const [sintomas, setSintomas] = useState("");
-  let citasLS = JSON.parse(localStorage.getItem("listaCitas")) || [];
-  const [citas, setCitas] = useState(citasLS);
+  const [nombre, setNombre] = useState("");
+  const [descripcion, setDescripcion] = useState("");
+  const [categoria, setCategoria] = useState("");
+  let peliculasLS = JSON.parse(localStorage.getItem("listaPeliculas")) || [];
+  const [peliculas, setPeliculas] = useState(peliculasLS);
 
   useEffect(() => {
-    localStorage.setItem("listaCitas", JSON.stringify(citas));
-  }, [citas]);
+    localStorage.setItem("listaPeliculas", JSON.stringify(peliculas));
+  }, [peliculas]);
 
-  const borrarCita = (citaEliminar) => {
-    let citasFiltrada = citas.filter((cita) => cita !== citaEliminar);
-    setCitas(citasFiltrada);
+  const borrarPelicula = (peliculaEliminar) => {
+    let peliculasFiltrada = peliculas.filter((pelicula) => pelicula !== peliculaEliminar);
+    setPeliculas(peliculasFiltrada);
   };
 
   const minLengthYMaxLenghth = (valor, min, max) => {
@@ -27,29 +25,21 @@ const Formulario = () => {
     }
   };
   const sumarioValidaciones = (
-    nombreMascota,
-    nombreDueño,
-    sintomas,
-    fecha,
-    hora
+    nombre,
+    descripcion,
+    categoria
   ) => {
     let error = "";
-    if (!minLengthYMaxLenghth(nombreMascota, 3, 30)) {
-      error += "Ingresa un nombre de mascota correcto (min:3 max:30 letras)\n";
+    if (!minLengthYMaxLenghth(nombre, 3, 40)) {
+      error += "Ingresa un nombre correcto (min:3 max:40 letras)\n";
     }
-    if (!minLengthYMaxLenghth(nombreDueño, 3, 30)) {
-      error += "Ingresa un nombre de dueño correcto (min:3 max:30 letras)\n";
+    if (!minLengthYMaxLenghth(descripcion, 10, 400)) {
+      error += "Ingresa una descripcion correcta (min:10 max:500 letras)\n";
     }
-    if (!minLengthYMaxLenghth(sintomas, 5, 60)) {
-      error += "Ingresa sintomas correctos (min:5 max:60 letras)\n";
+    if (categoria ==='') {
+      error += "Selecciona una categoria\n";
     }
-    if (!validarFecha(fecha)) {
-      error += "No puedes ingresar una fecha anterior\n";
-    }
-    if (!validarHora(hora)) {
-      error +=
-        "La hora ingresada es invalida. (Horario de atencion: 9:00 a 21:00)";
-    }
+
     if (error.length !== 0) {
       return error;
     } else {
@@ -57,44 +47,23 @@ const Formulario = () => {
     }
   };
 
-  const validarFecha = (fecha) => {
-    const FECHA_ACTUAL = new Date();
-    const FECHA_INGRESADA = new Date(fecha);
-    if (FECHA_ACTUAL <= FECHA_INGRESADA) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-
-  const validarHora = (hora) => {
-    const expresionHora = /^(0?9|1[0-9]|20):[0-5][0-9]\s?$/;
-    return expresionHora.test(hora);
-  };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(typeof hora);
     let sumario = sumarioValidaciones(
-      nombreMascota,
-      nombreDueño,
-      sintomas,
-      fecha,
-      hora
+      nombre,
+      descripcion,
+      categoria
     );
     if (sumario.length === 0) {
-      const nuevaCita = {
-        nombreMascota: nombreMascota,
-        nombreDueño: nombreDueño,
-        fecha: fecha,
-        hora: hora,
-        sintomas: sintomas,
+      const nuevaPelicula = {
+        nombre: nombre,
+        descripcion: descripcion,
+        categoria: categoria
       };
-      setCitas([...citas, nuevaCita]);
-      setNombreMascota("");
-      setNombreDueño("");
-      setFecha("");
-      setHora("");
-      setSintomas("");
+      setPeliculas([...peliculas, nuevaPelicula]);
+      setNombre("");
+      setDescripcion("");
+      setCategoria("");
     } else {
       alert(sumario);
     }
@@ -102,79 +71,54 @@ const Formulario = () => {
 
   return (
     <Container>
-      <h1 className="display-1 text-center mb-5">Veterinaria</h1>
+      <h1 className="display-1 text-center mb-5">Administrador de peliculas</h1>
       <Form onSubmit={handleSubmit}>
-        <Form.Group className="mb-3" controlId="nombreMascota">
-          <FloatingLabel controlId="nombreMascota" label="Nombre mascota">
+        <Form.Group className="mb-3" controlId="nombre">
+          <FloatingLabel controlId="nombre" label="Nombre de la pelicula">
             <Form.Control
               type="text"
-              placeholder="Nombre de mascota"
+              placeholder="Nombre de pelicula"
               minLength={3}
-              maxLength={30}
+              maxLength={40}
               required
-              onChange={(e) => setNombreMascota(e.target.value)}
-              value={nombreMascota}
-              id="nombreMascota"
+              onChange={(e) => setNombre(e.target.value)}
+              value={nombre}
+              id="nombre"
             />
           </FloatingLabel>
         </Form.Group>
-        <Form.Group className="mb-3" controlId="nombreDueño">
-          <FloatingLabel controlId="nombreDueño" label="Nombre dueño">
+        <Form.Group className="mb-3" controlId="descripcion">
+          <FloatingLabel controlId="descripcion" label="Descripcion">
             <Form.Control
-              type="text"
+            className="text-area"
+              as="textarea"
               placeholder="Nombre del dueño"
-              minLength={3}
-              maxLength={30}
+              minLength={10}
+              maxLength={400}
               required
-              onChange={(e) => setNombreDueño(e.target.value)}
-              value={nombreDueño}
-              id="nombreDueño"
+              onChange={(e) => setDescripcion(e.target.value)}
+              value={descripcion}
+              id="descripcion"
             />
           </FloatingLabel>
         </Form.Group>
-        <article className="row">
-          <div className="col-md-6">
-            <Form.Group className="mb-3" controlId="fecha">
-              <Form.Label>Fecha de cita</Form.Label>
-              <Form.Control
-                type="date"
-                required
-                onChange={(e) => setFecha(e.target.value)}
-                value={fecha}
-              />
-            </Form.Group>
-          </div>
-          <div className="col-md-6">
-            <Form.Group className="mb-3" controlId="hora">
-              <Form.Label>Horario de cita</Form.Label>
-              <Form.Control
-                type="time"
-                required
-                onChange={(e) => setHora(e.target.value)}
-                value={hora}
-              />
-            </Form.Group>
-          </div>
-        </article>
-        <Form.Group className="mb-3" controlId="sintomas">
-          <FloatingLabel controlId="sintomas" label="Sintomas">
-            <Form.Control
-              type="text"
-              placeholder="Sintomas"
-              minLength={5}
-              maxLength={60}
+        <Form.Group className="mb-3" controlId="categoria">
+            <Form.Select
               required
-              onChange={(e) => setSintomas(e.target.value)}
-              value={sintomas}
-              id="sintomas"
-            />
-          </FloatingLabel>
+              onChange={(e) => setCategoria(e.target.value)}
+              value={categoria}
+              id="categoria"
+            >
+              <option>Categoria 1</option>
+              <option>Categoria 2</option>
+              <option>Categoria 3</option>
+            </Form.Select>
         </Form.Group>
         <Button variant="primary" type="submit">
           Enviar
         </Button>
       </Form>
-      <ContenedorPeliculas citas={citas} borrarCita={borrarCita}></ContenedorPeliculas>
+      {/* <ContenedorPeliculas citas={citas} borrarCita={borrarCita}></ContenedorPeliculas> */}
     </Container>
   );
 };
