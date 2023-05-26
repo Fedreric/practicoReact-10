@@ -1,6 +1,6 @@
 import { Form, Button, Container, FloatingLabel } from "react-bootstrap";
 import { useState, useEffect } from "react";
-import ContenedorCitas from "./ContenedorCitas";
+import ContenedorPeliculas from "./ContenedorPeliculas";
 const Formulario = () => {
   const [nombreMascota, setNombreMascota] = useState("");
   const [nombreDueño, setNombreDueño] = useState("");
@@ -174,7 +174,7 @@ const Formulario = () => {
           Enviar
         </Button>
       </Form>
-      <ContenedorCitas citas={citas} borrarCita={borrarCita}></ContenedorCitas>
+      <ContenedorPeliculas citas={citas} borrarCita={borrarCita}></ContenedorPeliculas>
     </Container>
   );
 };

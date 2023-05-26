@@ -1,5 +1,5 @@
 import { Button, Card } from "react-bootstrap";
-const Cita = ({cita, borrarCita}) => {
+const Pelicula = ({cita, borrarCita}) => {
   return (
         <Card>
           <Card.Header>
@@ -22,4 +22,4 @@ const Cita = ({cita, borrarCita}) => {
   );
 };
 
-export default Cita;
+export default Pelicula;
