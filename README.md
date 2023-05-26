@@ -1,26 +1,24 @@
-# Trabajo practico N°1: React - Veterinaria!
+# Trabajo practico N°1: React - Peliculas!
 
 ![React](https://blog.wildix.com/wp-content/uploads/2020/06/react-logo.jpg)
 
-Ejercicio 9 del TP N°1-React: Veterinaria.
-Simula una aplecacion de creacion de citas para una veterinaria, donde se solicita:
-- Nombre de la mascota
-- Nombre del dueño
-- Fecha de la cita
-- Hora de la cita
-- Sintomas que presenta
+Ejercicio 10 del TP N°1-React: Crear Peliculas.
+Simula una aplecacion de creacion de peliculas, donde se solicita:
+- Nombre de la pelicula
+- Descripcion 
+- Categoria
 
-Y se muestras las citas cargadas en un administrador de citas, donde te permite eliminarlas.
+Y se muestras las peliculas cargadas en un administrador de peliculas, donde te permite eliminarlas.
 
 ## Para clonar el repositorio 💻
 
 ```bash
-git clone https://github.com/Fedreric/practicoReact-9.git
+git clone https://github.com/Fedreric/practicoReact-10.git
 ```
 >**EJECUTAR:** 
 - npm install
 - npm run dev 
-- https://practicoreact-9-fede39i.netlify.app/
+- https://practicoreact-10-fede39i.netlify.app/
 
 ## Autor 👨‍💻
  Federico Luciano Ledesma [GitHub](https://github.com/Fedreric)
