@@ -1,3 +1,7 @@
 .text-area{
     resize: none;
 }
+.card-pelicula{
+    border: 1px solid red;
+    height: auto;
+}

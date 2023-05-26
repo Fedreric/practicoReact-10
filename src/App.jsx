@@ -6,9 +6,9 @@ import Formulario from './components/Formulario';
 function App() {
 
   return (
-    <Container>
+    <section>
       <Formulario></Formulario>
-    </Container>
+    </section>
   )
 }
 

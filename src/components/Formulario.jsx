@@ -109,13 +109,13 @@ const Formulario = () => {
               value={categoria}
               id="categoria"
             >
-              <option>Categoria 1</option>
-              <option>Categoria 2</option>
-              <option>Categoria 3</option>
+              <option>Comedia</option>
+              <option>Drama</option>
+              <option>Infantil</option>
             </Form.Select>
         </Form.Group>
         <Button variant="primary" type="submit">
-          Enviar
+          Agregar
         </Button>
       </Form>
       <ContenedorPeliculas peliculas={peliculas} borrarPelicula={borrarPelicula}></ContenedorPeliculas>
