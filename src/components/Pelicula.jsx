@@ -1,22 +1,20 @@
 import { Button, Card } from "react-bootstrap";
-const Pelicula = ({cita, borrarCita}) => {
+const Pelicula = ({pelicula, borrarPelicula}) => {
   return (
         <Card>
           <Card.Header>
-            <Card.Title>Mascota: {cita.nombreMascota}</Card.Title>
+            <Card.Title>{pelicula.nombre}</Card.Title>
             <Card.Subtitle className="mb-2 text-muted">
-              Dueño: {cita.nombreDueño}
+              Categoria: {pelicula.categoria}
             </Card.Subtitle>
           </Card.Header>
           <Card.Body>
-            <Card.Text>Fecha: {cita.fecha}</Card.Text>
-            <Card.Text>Hora: {cita.hora} hs</Card.Text>
             <Card.Text>
-              Sintomas: {cita.sintomas}
+              Descripcion: {pelicula.descripcion}
             </Card.Text>
           </Card.Body>
           <Card.Footer>
-            <Button onClick={()=>borrarCita(cita)}>Borrar</Button>
+            <Button onClick={()=>borrarPelicula(pelicula)}>Borrar</Button>
           </Card.Footer>
         </Card>
   );

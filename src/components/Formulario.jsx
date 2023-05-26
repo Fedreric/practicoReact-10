@@ -118,7 +118,7 @@ const Formulario = () => {
           Enviar
         </Button>
       </Form>
-      {/* <ContenedorPeliculas citas={citas} borrarCita={borrarCita}></ContenedorPeliculas> */}
+      <ContenedorPeliculas peliculas={peliculas} borrarPelicula={borrarPelicula}></ContenedorPeliculas>
     </Container>
   );
 };
